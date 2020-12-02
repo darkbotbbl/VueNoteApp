@@ -1,6 +1,7 @@
 // instantiating an new event bus to use
-window.EventBus = new Vue();    // global event bus
+const EventBus = new Vue();    // global event bus
 
+// event component
 const inputComponent = {
     template: `
         <input 
@@ -32,6 +33,19 @@ const inputComponent = {
     },
 }
 
+// notes counter component
+const notesCounterComponent = {
+    template: ` <p>Number of Notes: <span>{{ number_of_notes }}</span></p>`,
+    data() {
+        return {
+            number_of_notes: 0,
+        }
+    },
+    created() {
+        EventBus.$on('add-note', e => this.number_of_notes++);
+    }
+}
+
 new Vue({
     el: "#app",
     data: {
@@ -41,6 +55,7 @@ new Vue({
     },
     components: {
         "input-component": inputComponent,
+        "notes-counter-component": notesCounterComponent,
     },
     methods: {
         addNote(event) {
