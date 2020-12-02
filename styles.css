@@ -1,0 +1,14 @@
+.input {
+    width: 100%;
+    background: white;
+    padding: 0.2em;
+}
+
+.input::placeholder {
+    color: red;
+    font-weight: bold;
+}
+
+h4 {
+    text-decoration: underline;
+}
