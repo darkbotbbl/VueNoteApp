@@ -1,3 +1,6 @@
+// instantiating an new event bus to use
+window.EventBus = new Vue();    // global event bus
+
 const inputComponent = {
     template: `
         <input 
@@ -16,7 +19,11 @@ const inputComponent = {
     },
     methods: {
         monitorEnterKey() {
-            this.$emit('add-note', {
+            // this.$emit('add-note', {
+            //     note: this.input,
+            //     timestamp: new Date().toLocaleString(),
+            // })
+            EventBus.$emit('add-note', {
                 note: this.input,
                 timestamp: new Date().toLocaleString(),
             })
@@ -40,5 +47,8 @@ new Vue({
             this.notes.push(event.note)
             this.timestamps.push(event.timestamp)
         }
+    },
+    created() {
+        EventBus.$on('add-note', event => this.addNote(event));
     }
 })
