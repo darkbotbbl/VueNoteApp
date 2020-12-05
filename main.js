@@ -1,5 +1,17 @@
-// instantiating an new event bus to use
-const EventBus = new Vue();    // global event bus
+// vuex store 
+const state = {
+    notes: [],
+    timestamps: [],
+}
+
+const mutation = {
+    ADD_NOTE() {
+
+    },
+    ADD_TIMESTAMP() {
+
+    },
+}
 
 // event component
 const inputComponent = {
@@ -20,15 +32,7 @@ const inputComponent = {
     },
     methods: {
         monitorEnterKey() {
-            // this.$emit('add-note', {
-            //     note: this.input,
-            //     timestamp: new Date().toLocaleString(),
-            // })
-            EventBus.$emit('add-note', {
-                note: this.input,
-                timestamp: new Date().toLocaleString(),
-            })
-            this.input = '';
+
         }
     },
 }
@@ -41,29 +45,8 @@ const notesCounterComponent = {
             number_of_notes: 0,
         }
     },
-    created() {
-        EventBus.$on('add-note', e => this.number_of_notes++);
-    }
 }
 
 new Vue({
-    el: "#app",
-    data: {
-        notes: [],
-        timestamps: [],
-        placeholder: "Enter a note, press enter to add.",
-    },
-    components: {
-        "input-component": inputComponent,
-        "notes-counter-component": notesCounterComponent,
-    },
-    methods: {
-        addNote(event) {
-            this.notes.push(event.note)
-            this.timestamps.push(event.timestamp)
-        }
-    },
-    created() {
-        EventBus.$on('add-note', event => this.addNote(event));
-    }
+   
 })
